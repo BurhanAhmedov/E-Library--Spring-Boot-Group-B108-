@@ -1,8 +1,12 @@
 package az.divacademy.springbootb108.service;
 
-import az.divacademy.springbootb108.model.Book;
+import az.divacademy.springbootb108.dto.BookDto;
+import az.divacademy.springbootb108.request.BookRequest;
 
 public interface BookService {
-  Book insertBook(Book book);
+
+  BookDto insertBook(BookRequest request);
+
+  BookDto findBookById(long id);
 
 }
