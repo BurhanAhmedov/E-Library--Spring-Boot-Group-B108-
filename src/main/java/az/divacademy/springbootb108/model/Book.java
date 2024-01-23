@@ -24,9 +24,9 @@ public class Book {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   long id;
   String name;
-  int pageCount;
-  int price;
-  int stock;
+  Integer pageCount;
+  Integer price;
+  Integer stock;
   boolean active;
   LocalDate createDate;
 

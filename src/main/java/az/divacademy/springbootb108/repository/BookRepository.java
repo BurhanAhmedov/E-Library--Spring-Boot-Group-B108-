@@ -1,12 +1,17 @@
 package az.divacademy.springbootb108.repository;
 
-import az.divacademy.springbootb108.dto.BookDto;
 import az.divacademy.springbootb108.model.Book;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-public interface BookRepository extends JpaRepository<Book,Long> {
-  @Query(value = "",nativeQuery = true)
-  BookDto findByNameAndActiveTrue(String name);
+public interface BookRepository extends JpaRepository<Book, Long> {
 
+  List<Book> findByNameAndActiveTrue(String name);
+
+  @Modifying
+  @Query("update Book set active = false where id=:id")
+  void softDeleteBookById(@Param("id") long id);
 }

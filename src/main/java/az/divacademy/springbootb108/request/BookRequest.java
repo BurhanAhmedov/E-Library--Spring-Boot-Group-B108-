@@ -14,9 +14,9 @@ import lombok.experimental.FieldDefaults;
 public class BookRequest {
   long id;
   String name;
-  int pageCount;
-  int price;
-  int stock;
+  Integer pageCount;
+  Integer price;
+  Integer stock;
   boolean active;
   LocalDate createDate;
 
