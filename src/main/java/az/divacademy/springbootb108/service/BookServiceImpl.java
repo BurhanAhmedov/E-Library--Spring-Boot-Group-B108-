@@ -28,6 +28,7 @@ public class BookServiceImpl implements BookService {
   public BookDto insertBook(BookRequest request) {
     final Book book = bookMapper.mapToBookFromRequest(request);
     book.setCreateDate(LocalDate.now());
+    System.out.println();
     Book savedBook = bookRepository.save(book);
     log.info("Book insert success!");
     final BookDto bookDto = bookMapper.mapToDtoFromBook(savedBook);
