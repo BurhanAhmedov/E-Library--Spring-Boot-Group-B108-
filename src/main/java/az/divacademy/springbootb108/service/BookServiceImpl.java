@@ -5,7 +5,6 @@ import az.divacademy.springbootb108.mapper.BookMapper;
 import az.divacademy.springbootb108.model.Book;
 import az.divacademy.springbootb108.repository.BookRepository;
 import az.divacademy.springbootb108.request.BookRequest;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,7 +26,6 @@ public class BookServiceImpl implements BookService {
   @Override
   public BookDto insertBook(BookRequest request) {
     final Book book = bookMapper.mapToBookFromRequest(request);
-    book.setCreateDate(LocalDate.now());
     Book savedBook = bookRepository.save(book);
     log.info("Book insert success!");
     final BookDto bookDto = bookMapper.mapToDtoFromBook(savedBook);
@@ -52,14 +50,14 @@ public class BookServiceImpl implements BookService {
 
   @Override
   public List<BookDto> findByName(String name) {
-     List<BookDto> dtoList = null;
+    List<BookDto> dtoList = null;
     try {
       final List<Book> bookList = bookRepository.findByNameAndActiveTrue(name);
       dtoList = bookList.stream()
           .map(bookMapper::mapToDtoFromBook)
           .collect(Collectors.toList());
-    }catch (Exception e){
-      log.error("Book Not Found By Name:"+name);
+    } catch (Exception e) {
+      log.error("Book Not Found By Name:" + name);
       e.getMessage();
     }
     return dtoList;
