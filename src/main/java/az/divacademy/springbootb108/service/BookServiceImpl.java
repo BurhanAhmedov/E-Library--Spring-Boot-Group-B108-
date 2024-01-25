@@ -1,12 +1,12 @@
 package az.divacademy.springbootb108.service;
 
 import az.divacademy.springbootb108.dto.BookDto;
+import az.divacademy.springbootb108.exception.NoDataFoundException;
 import az.divacademy.springbootb108.mapper.BookMapper;
 import az.divacademy.springbootb108.model.Book;
 import az.divacademy.springbootb108.repository.BookRepository;
 import az.divacademy.springbootb108.request.BookRequest;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,17 +35,12 @@ public class BookServiceImpl implements BookService {
 
   @Override
   public BookDto findBookById(long id) {
-    Book book = null;
-    try {
-      final Optional<Book> byId = bookRepository
-          .findById(id);
-      book = byId.get();
-    } catch (RuntimeException e) {
-      log.error("Book Not Found");
 
-    }
-
-    return bookMapper.mapToDtoFromBook(book);
+    final BookDto bookDto = bookRepository
+        .findById(id)
+        .map(bookMapper::mapToDtoFromBook)
+        .orElseThrow(() -> new NoDataFoundException("Book Not Found " + id));
+    return bookDto;
   }
 
   @Override
@@ -77,23 +72,8 @@ public class BookServiceImpl implements BookService {
   public BookDto updateBook(long id, BookRequest request) {
 
     final Book book = bookRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException());
-
+        .orElseThrow(() -> new NoDataFoundException("Book Not Found By Id:" + id));
     final Book newBook = bookMapper.mapForUpdate(book, request);
-
-
-/*    if (request.getName()!=null){
-      book.setName(request.getName());
-    }
-    if (request.getPrice()!=null){
-      book.setPrice(request.getPrice());
-    }
-    if (request.getPageCount()!=null){
-      book.setPageCount(request.getPageCount());
-    }
-    if (request.getStock()!=null){
-      book.setStock(request.getStock());
-    }*/
 
     final Book savedBook = bookRepository.save(newBook);
     return bookMapper.mapToDtoFromBook(savedBook);
