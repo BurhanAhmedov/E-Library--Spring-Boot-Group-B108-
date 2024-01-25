@@ -36,6 +36,7 @@ public class BookServiceImpl implements BookService {
   @Override
   public BookDto findBookById(long id) {
     Book book = null;
+    System.out.println();
     try {
       final Optional<Book> byId = bookRepository
           .findById(id);
