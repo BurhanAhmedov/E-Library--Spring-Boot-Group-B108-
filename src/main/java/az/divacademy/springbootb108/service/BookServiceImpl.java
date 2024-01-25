@@ -35,7 +35,7 @@ public class BookServiceImpl implements BookService {
 
   @Override
   public BookDto findBookById(long id) {
-
+  System.out.println();
     final BookDto bookDto = bookRepository
         .findById(id)
         .map(bookMapper::mapToDtoFromBook)
