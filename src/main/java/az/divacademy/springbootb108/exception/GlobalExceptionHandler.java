@@ -13,7 +13,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler
   public ResponseEntity<String> handleNoDataFoundException(NoDataFoundException exception) {
     log.error("Book Not Found");
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
+    return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
   }
 
 }

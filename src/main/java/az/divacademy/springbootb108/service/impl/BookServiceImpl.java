@@ -1,4 +1,4 @@
-package az.divacademy.springbootb108.service;
+package az.divacademy.springbootb108.service.impl;
 
 import az.divacademy.springbootb108.dto.BookDto;
 import az.divacademy.springbootb108.exception.NoDataFoundException;
@@ -6,6 +6,7 @@ import az.divacademy.springbootb108.mapper.BookMapper;
 import az.divacademy.springbootb108.model.Book;
 import az.divacademy.springbootb108.repository.BookRepository;
 import az.divacademy.springbootb108.request.BookRequest;
+import az.divacademy.springbootb108.service.BookService;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -35,11 +36,10 @@ public class BookServiceImpl implements BookService {
 
   @Override
   public BookDto findBookById(long id) {
-  System.out.println();
-    final BookDto bookDto = bookRepository
+    final Book book = bookRepository
         .findById(id)
-        .map(bookMapper::mapToDtoFromBook)
         .orElseThrow(() -> new NoDataFoundException("Book Not Found " + id));
+    final BookDto bookDto = bookMapper.mapToDtoFromBook(book);
     return bookDto;
   }
 
