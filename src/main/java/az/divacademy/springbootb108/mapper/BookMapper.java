@@ -16,7 +16,7 @@ public interface BookMapper {
 
   Book mapToBookFromRequest(BookRequest request);
 
-  @Mapping(target = "id",ignore = true)
-  @Mapping(target = "active",ignore = true)
+  @Mapping(target = "id", ignore = true)
+  @Mapping(target = "active", ignore = true)
   Book mapForUpdate(@MappingTarget Book book, BookRequest request);
 }
