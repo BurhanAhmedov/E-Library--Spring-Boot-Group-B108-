@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -38,12 +39,5 @@ public class Book {
 
   @CreatedDate
   LocalDate createDate;
-  @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
-  @JoinTable(
-      name = "book_author",
-      joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
-      inverseJoinColumns = @JoinColumn(name = "author_id")
-  )
-  Set<Author> authors;
 
 }

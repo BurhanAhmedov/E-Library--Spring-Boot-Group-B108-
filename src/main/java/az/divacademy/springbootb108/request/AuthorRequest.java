@@ -18,5 +18,4 @@ public class AuthorRequest {
   String name;
   String surname;
   boolean active;
-  Set<Book> books;
 }
