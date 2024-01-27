@@ -2,6 +2,7 @@ package az.divacademy.springbootb108.request;
 
 import az.divacademy.springbootb108.model.Author;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,6 @@ public class BookRequest {
   Integer stock;
   boolean active;
   LocalDate createDate;
-  Set<Author> authors;
+  List<Long> authorIds;
 
 }

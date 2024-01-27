@@ -23,4 +23,10 @@ public class AuthorController {
     final AuthorDto response = service.findAuthorById(id);
     return ResponseEntity.ok(response);
   }
+
+  @GetMapping
+  public ResponseEntity<List<AuthorDto>> findAuthorByNameAndSurname(@RequestParam String name, @RequestParam String surname){
+    final List<AuthorDto> response = service.findByNameAndSurname(name, surname);
+    return ResponseEntity.ok(response);
+  }
 }

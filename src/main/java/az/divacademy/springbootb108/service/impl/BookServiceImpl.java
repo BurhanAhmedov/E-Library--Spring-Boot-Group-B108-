@@ -3,11 +3,16 @@ package az.divacademy.springbootb108.service.impl;
 import az.divacademy.springbootb108.dto.BookDto;
 import az.divacademy.springbootb108.exception.NoDataFoundException;
 import az.divacademy.springbootb108.mapper.BookMapper;
+import az.divacademy.springbootb108.model.Author;
 import az.divacademy.springbootb108.model.Book;
+import az.divacademy.springbootb108.repository.AuthorRepository;
 import az.divacademy.springbootb108.repository.BookRepository;
 import az.divacademy.springbootb108.request.BookRequest;
 import az.divacademy.springbootb108.service.BookService;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,17 +26,27 @@ import org.springframework.transaction.annotation.Transactional;
 public class BookServiceImpl implements BookService {
 
   private final BookRepository bookRepository;
+  private final AuthorRepository authorRepository;
   private final BookMapper bookMapper;
 
 
   @Override
   public BookDto insertBook(BookRequest request) {
+    final List<Author> authors =  authorRepository.findAllById(request.getAuthorIds());
     final Book book = bookMapper.mapToBookFromRequest(request);
-    Book savedBook = bookRepository.save(book);
-    log.info("Book insert success!");
-    final BookDto bookDto = bookMapper.mapToDtoFromBook(savedBook);
-    log.info("Book mapper success");
-    return bookDto;
+    if (!authors.isEmpty() && authors!=null){
+      final Set<Author> authorSet = new HashSet<>(authors);
+      book.setAuthors(authorSet);
+      Book savedBook = bookRepository.save(book);
+      log.info("Book insert success!");
+      final BookDto bookDto = bookMapper.mapToDtoFromBook(savedBook);
+      log.info("Book mapper success");
+      return bookDto;
+    }else {
+      throw new NoDataFoundException("Authors Not Found");
+    }
+
+
   }
 
   @Override
