@@ -1,9 +1,8 @@
 package az.divacademy.springbootb108.request;
 
-import az.divacademy.springbootb108.model.Author;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +16,7 @@ import lombok.experimental.FieldDefaults;
 public class BookRequest {
 
   long id;
+  @NotNull
   String name;
   Integer pageCount;
   Integer price;

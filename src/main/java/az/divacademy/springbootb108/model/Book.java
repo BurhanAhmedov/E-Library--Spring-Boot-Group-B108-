@@ -9,9 +9,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -45,8 +42,8 @@ public class Book {
   @CreatedDate
   LocalDate createDate;
 
-  @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-      @JoinTable(name = "book_author",
+  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @JoinTable(name = "book_author",
       joinColumns = @JoinColumn(name = "book_id"),
       inverseJoinColumns = @JoinColumn(name = "author_id"))
   Set<Author> authors = new HashSet<>();
