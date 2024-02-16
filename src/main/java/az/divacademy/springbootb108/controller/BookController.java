@@ -3,6 +3,7 @@ package az.divacademy.springbootb108.controller;
 import az.divacademy.springbootb108.dto.BookDto;
 import az.divacademy.springbootb108.request.BookRequest;
 import az.divacademy.springbootb108.service.BookService;
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class BookController {
   private final BookService bookService;
 
   @PostMapping()
-  public ResponseEntity<BookDto> insertBook(@Validated @RequestBody BookRequest request) {
+  public ResponseEntity<BookDto> insertBook(@Valid @RequestBody BookRequest request) {
     BookDto response = bookService.insertBook(request);
     return ResponseEntity.ok(response);
   }
@@ -61,6 +62,4 @@ public class BookController {
     bookService.softDeleteBookById(id);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
-
-
 }
