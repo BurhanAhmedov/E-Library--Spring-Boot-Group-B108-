@@ -9,13 +9,13 @@
       http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
 
 
-
+<!--
   <changeSet id="2024-02-15-add-column-page" author="burhan.ahmadov">
     <addColumn tableName="book">
       <column name="page" type="INTEGER">
         <constraints nullable="false"/>
       </column>
     </addColumn>
-  </changeSet>
+  </changeSet>-->
 
 </databaseChangeLog>

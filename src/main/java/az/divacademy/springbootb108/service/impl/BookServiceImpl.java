@@ -11,7 +11,6 @@ import az.divacademy.springbootb108.request.BookRequest;
 import az.divacademy.springbootb108.service.BookService;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +27,7 @@ public class BookServiceImpl implements BookService {
   private final BookRepository bookRepository;
   private final AuthorRepository authorRepository;
   private final BookMapper bookMapper;
+ //private final BookBatis bookBatis;
 
 
   @Override
@@ -54,6 +54,8 @@ public class BookServiceImpl implements BookService {
     final Book book = bookRepository
         .findById(id)
         .orElseThrow(() -> new NoDataFoundException("Book Not Found " + id));
+
+   // Book book = bookBatis.getBookById(id);
     final BookDto bookDto = bookMapper.mapToDtoFromBook(book);
     return bookDto;
   }
