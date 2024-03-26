@@ -55,7 +55,6 @@ public class BookServiceImpl implements BookService {
         .findById(id)
         .orElseThrow(() -> new NoDataFoundException("Book Not Found " + id));
 
-   // Book book = bookBatis.getBookById(id);
     final BookDto bookDto = bookMapper.mapToDtoFromBook(book);
     return bookDto;
   }

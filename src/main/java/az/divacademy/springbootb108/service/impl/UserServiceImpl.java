@@ -1,21 +1,19 @@
 package az.divacademy.springbootb108.service.impl;
 
-import az.divacademy.springbootb108.model.User;
 import az.divacademy.springbootb108.repository.UserRepository;
 import az.divacademy.springbootb108.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-  private final UserRepository repository;
-  private final PasswordEncoder encoder;
-
-  @Override
-  public User register(User user) {
-    user.setPassword(encoder.encode(user.getPassword()));
-   return repository.save(user);
-  }
+    private final UserRepository userRepository;
+    @Override
+    public UserDetailsService userDetailsService() {
+        return username -> userRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
 }

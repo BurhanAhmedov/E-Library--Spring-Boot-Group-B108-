@@ -1,4 +1,4 @@
-package az.divacademy.springbootb108.config;
+package az.divacademy.springbootb108.service.impl;
 
 import az.divacademy.springbootb108.model.User;
 import az.divacademy.springbootb108.repository.UserRepository;

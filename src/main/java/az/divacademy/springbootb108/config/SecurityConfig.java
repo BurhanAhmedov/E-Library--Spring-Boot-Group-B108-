@@ -1,7 +1,9 @@
+/*
 package az.divacademy.springbootb108.config;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+import az.divacademy.springbootb108.service.impl.UserInfoDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,3 +55,4 @@ public class SecurityConfig {
 
 
 }
+*/

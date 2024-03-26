@@ -1,8 +1,7 @@
 package az.divacademy.springbootb108.service;
 
-import az.divacademy.springbootb108.model.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService {
-  User register(User user);
-
+    UserDetailsService userDetailsService();
 }
