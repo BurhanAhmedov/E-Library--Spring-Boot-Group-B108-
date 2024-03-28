@@ -53,12 +53,12 @@ public class JwtServiceImpl implements JwtService {
         .claims(extraClaims)
         .subject(userDetails.getUsername())
         .issuedAt(new Date(System.currentTimeMillis()))
-        .expiration(new Date(System.currentTimeMillis() + 10))
+        .expiration(new Date(System.currentTimeMillis() + 60000))
         .signWith(key)
         .compact();
   }
 
-  private boolean isTokenExpired(String token) {
+  public boolean isTokenExpired(String token) {
     return extractExpiration(token).before(new Date());
   }
 
