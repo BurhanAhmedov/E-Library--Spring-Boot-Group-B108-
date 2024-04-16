@@ -2,6 +2,7 @@ package az.divacademy.springbootb108.config;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
+import az.divacademy.springbootb108.exception.ServletExceptionHandler;
 import az.divacademy.springbootb108.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

@@ -19,7 +19,7 @@ public class JwtServiceImpl implements JwtService {
 
 /*  @Value("${token.signing.key}")
   private String jwtSigningKey;*/
-  private SecretKey key;
+  private final SecretKey key;
 
   public JwtServiceImpl(){
     String signingKey = "413F4428472B4B6250655368566D5970337336763979244226452948404D6351";
@@ -53,7 +53,7 @@ public class JwtServiceImpl implements JwtService {
         .claims(extraClaims)
         .subject(userDetails.getUsername())
         .issuedAt(new Date(System.currentTimeMillis()))
-        .expiration(new Date(System.currentTimeMillis() + 60000))
+        .expiration(new Date(System.currentTimeMillis() + 3600000))
         .signWith(key)
         .compact();
   }
